@@ -1,0 +1,36 @@
+package testA;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * @author 作者:lcl
+ * @version 创建时间：2017年3月15日 上午10:39:15
+ * 类说明:寻找全部子集
+ */
+public class AllSubset {
+
+	public static void main(String[] args) {
+		int []target ={1,2,3,4};
+		AllSubset t =new AllSubset();
+		t.subset(target);
+	}
+	public ArrayList<ArrayList<Integer>> subset(int []nums){
+		ArrayList<ArrayList<Integer>> all = new ArrayList<ArrayList<Integer>>();
+		int max = 1 << nums.length;//左移就是在末尾加0,eg:1末尾加4个0就是16（二进制10000）
+		for(int i = 0;i < max ;i++){
+			int index = 0;
+			int k = i;
+			ArrayList<Integer> list = new ArrayList<Integer>();
+			while(k > 0){
+				if((k&1) > 0){//整数与0或1，是指转换成二进制的最后一位去做与运算
+					list.add(nums[index]);
+				}
+				k = k >> 1;
+				index++;
+			}
+			all.add(list);
+		}
+		return all;
+	}
+}
